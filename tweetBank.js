@@ -1,26 +1,25 @@
-const _ = require('lodash');
-
-//{name: Name, content: tweets}, {name: Name, content: tweets}];
-// var data = [ {name: 'Geoff', content: 'tweet one!'}, {name: 'Geoff', content: 'tweet two!'}];
-
+var _ = require('lodash');
 var data = [];
+var count = 0
 
 function add (name, content) {
-  data.push({ name: name, content: content });
-  console.log(data)
+  count++ 
+
+  data.push({id:count.toString() ,name: name, content: content });
 }
 
 function list () {
   return _.cloneDeep(data);
 }
 
-function find (properties) { // properties: function(elem) {return elem.name === name}
+function find (properties) {
   return _.cloneDeep(_.filter(data, properties));
 }
 
 module.exports = { add: add, list: list, find: find };
 
-// functions to seed data arr:
+
+
 
 const randArrayEl = function(arr) {
   return arr[Math.floor(Math.random() * arr.length)];
@@ -29,7 +28,6 @@ const randArrayEl = function(arr) {
 const getFakeName = function() {
   const fakeFirsts = ['Nimit', 'David', 'Shanna', 'Emily', 'Scott', 'Karen', 'Ben', 'Dan', 'Ashi', 'Kate', 'Omri', 'Gabriel', 'Joe', 'Geoff'];
   const fakeLasts = ['Hashington', 'Stackson', 'McQueue', 'OLogn', 'Ternary', 'Claujure', 'Dunderproto', 'Binder', 'Docsreader', 'Ecma'];
-  // return randArrayEl(fakeFirsts);
   return randArrayEl(fakeFirsts) + " " + randArrayEl(fakeLasts);
 };
 
@@ -41,5 +39,3 @@ const getFakeTweet = function() {
 for (let i = 0; i < 10; i++) {
   module.exports.add( getFakeName(), getFakeTweet() );
 }
-
-
